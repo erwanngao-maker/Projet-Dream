@@ -6,4 +6,5 @@ def groq_client():
     client = Groq(
             api_key= api_key_file.read()
         )
+    api_key_file.close()
     return client

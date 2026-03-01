@@ -1,12 +1,11 @@
 from groq_client import groq_client as gc
-
-
-def dream_processor(dream):
+def dream_interpretor(dream):
     
     client = gc()
     prompt_txt = open("prompts/summary_prompt.txt")
     line = prompt_txt.read()
     prompt = ''
+
     while line != '':
         prompt += line
         line = prompt_txt.read()

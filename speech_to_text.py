@@ -3,7 +3,7 @@ from groq_client import groq_client
 
 def speech_to_text():
     client = groq_client()
-    audio_path = "data/dream_audio.wav"
+    audio_path = "data/speechs/speech.wav"
 
     with open(audio_path, "rb") as file:
         # Create a transcription of the audio file

@@ -1,0 +1,9 @@
+ Analyse le rêve: "_" et structure-le en :
+- Personnages
+- Lieu
+- Émotions
+- Symboles importants
+- Résumé en 5 lignes
+Ne fais pas de diagnostic médical ou psychologique.
+Propose uniquement une interprétation symbolique.
+Output en .json.

@@ -16,4 +16,4 @@ def dream_processor(dream):
         ],
         model="llama-3.3-70b-versatile",
     )
-    print(chat_completion.choices[0].message.content)
+    return chat_completion.choices[0].message

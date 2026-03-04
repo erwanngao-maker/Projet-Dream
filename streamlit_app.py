@@ -4,12 +4,12 @@ import os
 from image_generator import generate_image
 
 DATA_PATH = "data/dreams.json"
-IMAGE_FOLDER = "images"
+IMAGE_FOLDER = "Images"
 
 st.set_page_config(page_title="Dream Interpreter", layout="centered")
 
 st.title("🌙 Dream Interpreter")
-st.write("Application locale de visualisation et génération d'images à partir d’un rêve.")
+st.write("Application de visualisation et génération d'images à partir d’un rêve.")
 
 def load_dreams():
     if os.path.exists(DATA_PATH):

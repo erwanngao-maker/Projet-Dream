@@ -6,8 +6,8 @@ import sounddevice as sd
 import wavio
 
 DATA_PATH = "data/dreams.json"
-IMAGE_FOLDER = "Images"
-VOICE_FOLDER = "Voices"
+IMAGE_FOLDER = "data/images"
+VOICE_FOLDER = "data/speechs"
 
 st.set_page_config(page_title="Dream Interpreter", layout="centered")
 
@@ -50,35 +50,32 @@ else:
         st.subheader("🖼️ Image existante")
         st.image(dream["image_path"])
 
-    if st.button("🎨 Générer une nouvelle image"):
-        prompt = dream.get("interpretation") or dream.get("dream")
-        with st.spinner("Génération de l'image en cours..."):
-            image_path = generate_image(prompt)
-        if image_path:
-            dream["image_path"] = image_path
-            save_dreams(dreams)
-            st.success("Image générée et sauvegardée avec succès.")
-            st.image(image_path)
-        else:
-            st.error("Erreur lors de la génération.")
+if st.button("🎨 Générer une nouvelle image"):
+    prompt = dream.get("interpretation") or dream.get("dream")
+    with st.spinner("Génération de l'image en cours..."):
+        image_path = generate_image(prompt)
+    if image_path:
+        dream["image_path"] = image_path
+        save_dreams(dreams)
+        st.success("Image générée et sauvegardée avec succès.")
+        st.image(image_path)
+    else:
+        st.error("Erreur lors de la génération.")
 
-    st.subheader("🎤 Ajouter ou écouter la voix")
+st.subheader("🎤 Ajouter ou écouter la voix")
 
-    if not os.path.exists(VOICE_FOLDER):
-        os.makedirs(VOICE_FOLDER)
-
-    if dream.get("voice_path") and os.path.exists(dream["voice_path"]):
-        st.audio(dream["voice_path"], format='audio/wav')
+if dream.get("voice_path") and os.path.exists(dream["voice_path"]):
+    st.audio(dream["voice_path"], format='audio/wav')
 
     duration = st.slider("Durée de l'enregistrement (secondes)", 1, 30, 5)
 
-    if st.button("⏺️ Enregistrer la voix"):
-        st.info("Enregistrement en cours...")
-        recording = sd.rec(int(duration * 44100), samplerate=44100, channels=2)
-        sd.wait()
-        voice_path = os.path.join(VOICE_FOLDER, f"dream_{selected_index+1}.wav")
-        wavio.write(voice_path, recording, 44100, sampwidth=2)
-        dream["voice_path"] = voice_path
-        save_dreams(dreams)
-        st.success("Enregistrement terminé et sauvegardé !")
-        st.audio(voice_path, format='audio/wav')
+if st.button("⏺️ Enregistrer la voix"):
+    st.info("Enregistrement en cours...")
+    recording = sd.rec(int(duration * 44100), samplerate=44100, channels=2)
+    sd.wait()
+    voice_path = os.path.join(VOICE_FOLDER, f"dream_{selected_index+1}.wav")
+    wavio.write(voice_path, recording, 44100, sampwidth=2)
+    dream["voice_path"] = voice_path
+    save_dreams(dreams)
+    st.success("Enregistrement terminé et sauvegardé !")
+    st.audio(voice_path, format='audio/wav')

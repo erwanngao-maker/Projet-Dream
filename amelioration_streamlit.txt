@@ -1,0 +1,4 @@
+Chose a ajouter et changer:
+    Un champ pour ecrire la description du reve
+    Un enregistreur de voix
+    
